@@ -7,42 +7,41 @@ import localHeadshotImage from '../images/headshot.jpg';
 const allNavItems = await Astro.glob('../content/nav-items/*.md');
 ---
 
-<Layout title="Nice lol">
+<Layout title="Pearce Odegard">
 		<h1><span class="text-gradient">Pearce Odegard</span></h1>
-		<Image class="headshot" src={localHeadshotImage} alt="Pearce Odegard" />
-
-		<h2>Freelance Developer and Tech Instructor</h2>
-
-		<p class="description">
-			I am a freelance developer and tech instructor. I specialize in full-stack web development, 
-			with a particular love for <em>Node</em> and <em>TypeScript</em>. 
-			I also have a passion for teaching, with experience teaching online <em>JavaScript</em>, <em>Java</em>, and <em>C#</em> courses 
-			for <a href="https://www.launchcode.org/">LaunchCode</a>.
-		</p>
-
-		<ul role="list" class="link-card-flex">
+		<div class="image-text">
+			<Image class="headshot" src={localHeadshotImage} alt="Pearce Odegard" />
+			<h2>Freelance Developer and Tech Instructor</h3>
+			<div class="description">
+				<p>
+					Hi, I'm Pearce! I specialize in full-stack web development using a variety of technologies built around <em>Node</em> and <em>TypeScript</em>.
+				</p>
+				<p>
+					I also have a passion for teaching, having instructed remote web development courses in <em>JavaScript</em>, <em>Java</em>, and
+					<em>C#</em> at <a href="https://www.launchcode.org/">LaunchCode</a>.
+				</p>
+				<p>
+					Explore the items below to dive deeper into my portfolio:
+				</p>
+			</div>
+			<div role="list" class="link-card-flex">
 			{
 				allNavItems.map((item) => (
 					<Card 
 					href={item.frontmatter.href} 
-					title={item.frontmatter.titleLines} 
+					title={item.frontmatter.title} 
 					body={item.compiledContent()} 
 					/>))
 			}
-		</ul>
+			</div>
+		</div>
+
+		
 </Layout>
 
 <style>
 
-	.headshot {
-		display: flex;
-		left: 50%;
-		width: 200px;
-		height: auto;
-		margin: auto;
-		border-radius: 50%;
-		align-items: center;
-	}
+	
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
@@ -50,12 +49,27 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		text-align: center;
 		font-family: 'VulfMonoBlackDemo', sans-serif;
 	}
+	.headshot {
+		display: flex;
+		padding: .5rem;
+		height: auto;
+		border-radius: 50%;
+		max-width: 100%;
+		float: left;
+		/* Still not convinced on whether I want the text to follow the circle shape of the image or just be next to it
+		leaning toward just next it without this circle() rule */
+		/* shape-outside: circle(); */
+		margin: 20px;
+	}
 	h2 {
-		font-size: 3rem;
+		font-size: 2rem;
 		font-weight: bold;
 		line-height: 1;
-		text-align: center;
 		font-family: 'VulfSansDemo', sans-serif;
+	}
+	.image-text {
+		position: relative;
+  		width: fit-content;
 	}
 	.text-gradient {
 		background-image: var(--accent-gradient);
@@ -65,13 +79,11 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		background-position: 0%;
 	}
 	.description {
-		margin-bottom: 1rem;
-		/* text-align: center; */
 		font-family: 'VulfSansDemo', sans-serif;
 		flex-grow: 1;
-		text-align: center;
+		font-size: 1.5rem;
 	}
-	.description > a {
+	.description > p > a {
 		text-decoration: none;
 		color: #333;
 		position: relative; /* Needed for the underline animation */
@@ -79,7 +91,7 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		transition: color 0.3s, border-color 0.3s; /* Add smooth transitions */
 	}
 
-	.description > a:hover {
+	.description > p > a:hover {
 		color: #ffa500; /* Change the link color on hover */
 		border-color: #ffa500; /* Change border color on hover */
 	}
@@ -97,9 +109,8 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 	.link-card-flex {
 		display: flex;
 		gap: 2rem;
-		justify-content: space-between;
 		padding: 0;
-		/* flex-wrap: wrap; */
+		flex-wrap: wrap;
 	}
 	@media (max-width: 768px) {
 	.link-card-flex {

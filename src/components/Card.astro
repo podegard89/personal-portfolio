@@ -5,77 +5,86 @@ interface Props {
 	href: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title } = Astro.props;
 ---
 
-<li class="link-card">
+<div class="link-card">
 	<a  href={href}>
 		<h2>
 			<span>{title}</span>
 			<!-- <span>&nbsp;&#128073;</span> -->
 		</h2>
-		<p set:html={body}>
-		</p>
+		<!-- <p set:html={body}>
+		</p> -->
 	</a>
-</li>
+</div>
 <style>
 	.link-card {
+		font-size: smaller;
 		list-style: none;
 		display: flex;
+		justify-content: center;
 		padding: 1px;
 		max-width: calc(33.33% - 20px);
-		min-width: 250px;
-		flex-grow: 1;
-		/* flex-basis: calc(33.33% - 20px); */
 		background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
-		border-radius: 8px;
-		text-align: center;
 		background-size: 400%;
 		background-position: 100%;
 		transition: background-position 0.7s ease;
 		z-index: 1;
 		position: relative;
+  		border-radius: 50%;
 	}
-	.link-card::before {
-		border-radius: 8px;
-		position: absolute;
-		content: "";
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-image: linear-gradient(
-			to top,
-			rgba(var(--accent-light)),
-			rgba(var(--accent-light))
-		);
-		z-index: -1;
-		transition: opacity 0.5s linear;
-		opacity: 0;
-	}
-	.link-card:hover::before {
-		opacity: 1;
-	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1rem);
-		border-radius: 8px;
-		color: white;
-		transition: color 0.5s ease;
-	}
-	(.link-card > a):hover {
-		color: var(--accent);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
+
+.link-card::before {
+  border-radius: 50%;
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to top,
+    rgba(var(--accent-light)),
+    rgba(var(--accent-light))
+  );
+  z-index: -1;
+  transition: opacity 0.5s linear;
+  opacity: 0;
+}
+
+.link-card:hover::before {
+  opacity: 1;
+}
+
+.link-card > a {
+  /* Add equal width and height to create a perfect square */
+  width: 200px; /* You can adjust this value */
+  height: 200px; /* You can adjust this value */
+  text-decoration: none;
+  display: flex; /* Center content vertically */
+  flex-direction: column; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  color: white;
+  transition: color 0.5s ease;
+  text-align: center;
+  align-items: center;
+}
+
+.link-card > a:hover {
+  color: var(--accent);
+}
+
+h2 {
+  margin: 0; /* Remove auto margin */
+  font-size: 1.25rem;
+}
+
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
 
 
 

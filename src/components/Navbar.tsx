@@ -29,46 +29,51 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
   };
 
   return (
-    <div className={styles.nav}>
-      {isMobile ? (
-        <div className={styles["mobile-menu"]}>
-          <button className={styles["menu-button"]} onClick={toggleMenu}>
-            ☰
-          </button>
-          {isMenuOpen && (
-            <div className={styles["menu-list"]}>
-              <a href="/" className={styles["nav__list__item"]}>
-                Home
-              </a>
-              {allNavItems.map((item) => (
-                <a
-                  key={item.frontmatter.href}
-                  href={item.frontmatter.href}
-                  className={styles["menu-list-item"]}
-                >
-                  {item.frontmatter.title}
+    <div className={styles["nav-container"]}>
+      <nav className={styles.nav}>
+        {isMobile ? (
+          <div className={styles["mobile-menu"]}>
+            <button className={styles["menu-button"]} onClick={toggleMenu}>
+              ☰
+            </button>
+            {isMenuOpen && (
+              <div className={styles["menu-list"]}>
+                <a href="/" className={styles["nav__list__item"]}>
+                  Home
                 </a>
-              ))}
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className={styles["nav__list"]}>
-          <a href="/" className={styles["nav__list__item"]}>
-            Home <span className="emoji">🏠</span>
-          </a>
-          {allNavItems.map((item) => (
-            <a
-              key={item.frontmatter.href}
-              href={item.frontmatter.href}
-              className={styles["nav__list__item"]}
-            >
-              {item.frontmatter.title}{" "}
-              <span className="emoji">{item.frontmatter.emoji}</span>
+                {allNavItems.map((item) => (
+                  <a
+                    key={item.frontmatter.href}
+                    href={item.frontmatter.href}
+                    className={styles["menu-list-item"]}
+                  >
+                    {item.frontmatter.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className={styles["nav__list"]}>
+            <span className={styles["emoji"]}>🏠</span>
+            <a href="/" className={styles["nav__list__item"]}>
+              Home <span className={styles["emoji"]}>🏠</span>
             </a>
-          ))}
-        </div>
-      )}
+            {allNavItems.map((item) => (
+              <a
+                key={item.frontmatter.href}
+                href={item.frontmatter.href}
+                className={styles["nav__list__item"]}
+              >
+                {item.frontmatter.title}{" "}
+                <span className={styles["emoji"]}>
+                  {item.frontmatter.emoji}
+                </span>
+              </a>
+            ))}
+          </div>
+        )}
+      </nav>
     </div>
   );
 };

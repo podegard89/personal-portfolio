@@ -1,7 +1,20 @@
 /* Reset some default styles */
 .nav {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
+  border: 2px solid #333; /* Add a transparent border */
+  border-radius: 8px; /* Set border radius to 8 pixels */
+  padding: 1rem; /* Add padding as needed */
+  transition: border-color 0.3s;
+  margin: 0 auto;
+}
+
+/* Set the border color to match the text color on hover */
+.nav:hover {
+  border-color: #ffa500; /* Match the text color (#ffa500 is orange) */
+}
+
+.nav-container {
+  text-align: center;
 }
 
 .nav__list {
@@ -13,7 +26,7 @@
   text-decoration: none;
   word-spacing: -0.25rem;
   color: #333;
-  margin: 0 10px; /* Adjust the horizontal spacing as needed */
+  margin: 0 15px; /* Adjust the horizontal spacing as needed */
   position: relative; /* Needed for the underline animation */
   border-bottom: 2px solid transparent; /* Transparent border by default */
   transition: color 0.3s, border-color 0.3s; /* Add smooth transitions */
@@ -26,12 +39,14 @@
 
 .emoji {
   visibility: hidden;
-  display: none;
+  opacity: 0; /* Start with zero opacity */
+  transition: visibility 0s, opacity 0.3s ease-in-out; /* Add transition for opacity */
 }
 
-/* .nav__list__item:hover > .emoji {
-  display: block;
-} */
+.nav__list__item:hover > .emoji {
+  visibility: visible; /* Make the emoji visible on hover */
+  opacity: 1; /* Fade in the emoji on hover */
+}
 
 /* Style for the mobile menu container */
 .mobile-menu {
