@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import * as description from '../content/home-content/description.md';
 
 const allNavItems = await Astro.glob('../content/nav-items/*.md');
 ---
@@ -11,14 +10,19 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		<h1><span class="text-gradient">Pearce Odegard</span></h1>
 		<h2>Freelance Developer and Tech Instructor</h2>
 
-		<div class="description" set:html={description.compiledContent()}/>
+		<p class="description">
+  			I am a freelance developer and tech instructor. I specialize in full-stack web development, 
+			with a particular love for <em>Node</em> and <em>TypeScript</em>. 
+			I also have a passion for teaching, with experience teaching online JavaScript, Java, and C# courses 
+			for <a href="https://www.launchcode.org/">LaunchCode</a>.
+		</p>
 		<ul role="list" class="link-card-flex">
 			{
 				allNavItems.map((item) => (
 					<Card 
 					href={item.frontmatter.href} 
-					title={item.frontmatter.title} 
-					body={item.frontmatter.body} 
+					title={item.frontmatter.titleLines} 
+					body={item.compiledContent()} 
 					/>))
 			}
 		</ul>
@@ -26,6 +30,34 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 </Layout>
 
 <style>
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Regular.otf') format('opentype');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Light.otf') format('opentype');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Bold.otf') format('opentype');
+		font-weight: bold;
+		font-style: bold;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Italic.otf') format('opentype');
+		font-weight: normal;
+		font-style: italic;
+		font-display: swap;
+	}
 	main {
 		margin: auto;
 		padding: 1rem;
@@ -53,10 +85,12 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 	}
 	h2 {
 		font-size: 3rem;
-		font-weight: 500;
+		font-weight: bold;
 		line-height: 1;
 		text-align: center;
 		margin-bottom: 1em;
+		font-family: 'VulfSansDemo', sans-serif;
+
 	}
 	.text-gradient {
 		background-image: var(--accent-gradient);
@@ -67,10 +101,20 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 	}
 	.description {
 		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent), 66%), rgba(var(--accent-light), 33%));
-		padding: 1.5rem;
-		border-radius: 8px;
+		text-align: center;
+		font-family: 'VulfSansDemo', sans-serif;
+	}
+	.description > a {
+		text-decoration: none;
+		color: #333;
+		position: relative; /* Needed for the underline animation */
+		border-bottom: 2px solid transparent; /* Transparent border by default */
+		transition: color 0.3s, border-color 0.3s; /* Add smooth transitions */
+	}
+
+	.description > a:hover {
+		color: #ffa500; /* Change the link color on hover */
+		border-color: #ffa500; /* Change border color on hover */
 	}
 	.description code {
 		font-size: 0.8em;
@@ -88,5 +132,6 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		gap: 2rem;
 		justify-content: space-between;
 		padding: 0;
+		/* flex-wrap: wrap; */
 	}
 </style>

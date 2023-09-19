@@ -1,5 +1,8 @@
 ---
 href: /work-history/
+titleLines: ——— Work History ———
 title: Work History
-body: See my technical work history.
+body: See a timeline of my technical and non-technical work history.
 ---
+
+See a timeline of my technical work history.
