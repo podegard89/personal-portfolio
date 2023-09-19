@@ -24,15 +24,37 @@ const { href, title, body } = Astro.props;
 		display: flex;
 		padding: 1px;
 		max-width: calc(33.33% - 20px);
+		min-width: 250px;
 		flex-grow: 1;
-		flex-basis: calc(33.33% - 20px);
-		border: 1px solid rgba(var(--accent-light), 25%);
+		/* flex-basis: calc(33.33% - 20px); */
 		background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
-		background-size: 200% 100%; /* Set initial background size for gradient */
-		background-position: 100% 0; /* Set initial background position to start from the right */
 		border-radius: 8px;
 		text-align: center;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+		background-size: 400%;
+		background-position: 100%;
+		transition: background-position 0.7s ease;
+		z-index: 1;
+		position: relative;
+	}
+	.link-card::before {
+		border-radius: 8px;
+		position: absolute;
+		content: "";
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-image: linear-gradient(
+			to top,
+			rgba(var(--accent-light)),
+			rgba(var(--accent-light))
+		);
+		z-index: -1;
+		transition: opacity 0.5s linear;
+		opacity: 0;
+	}
+	.link-card:hover::before {
+		opacity: 1;
 	}
 	.link-card > a {
 		width: 100%;
@@ -41,31 +63,20 @@ const { href, title, body } = Astro.props;
 		padding: calc(1rem);
 		border-radius: 8px;
 		color: white;
-		/* background-color: rgba(var(--accent) 33%); */
-		opacity: 0.8;
+		transition: color 0.5s ease;
+	}
+	(.link-card > a):hover {
+		color: var(--accent);
 	}
 	h2 {
 		margin: 0;
 		font-size: 1.25rem;
-		transition: color 0.6s ;
 	}
 	p {
 		margin-top: 0.5rem;
 		margin-bottom: 0;
 	}
-	.link-card:is(:hover, :focus-within) {
-		/* transition: background 0.6s cubic-bezier(0.22, 1, 0.36, 1); */
-		background-position: 0 0;
-		background: linear-gradient(rgba(var(--accent-light)), rgba(var(--accent-light)));
-	}
-	/* .link-card:is(:hover, :focus-within) h2 {
-		color: linear-gradient(rgba(var(--accent-light)), rgba(var(--accent-light)));
-	} */
-	/* .line-container {
-		white-space: nowrap;
-	} */
-	.line {
-		overflow: hidden;
-		white-space: nowrap;
-	}
+
+
+
 </style>

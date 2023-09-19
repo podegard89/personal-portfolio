@@ -19,11 +19,14 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		<title>{title}</title>
 	</head>
 	<body>
-		<Navbar allNavItems={allNavItems} client:load/>
-		<slot />
+		<main>
+			<Navbar allNavItems={allNavItems} client:load/>
+			<slot />
+		</main>
 	</body>
 </html>
 <style is:global>
+	/* VulfMono family */
 	@font-face {
 		font-family: 'VulfMonoDemo';
 		src: url('/fonts/VulfMonoDemo-Regular.otf') format('opentype');
@@ -56,9 +59,56 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		font-display: swap;
 	}
 
+	@font-face {
+		font-family: 'VulfMonoDemo';
+		src: url('/fonts/VulfMonoDemo-Italic.otf') format('opentype');
+		font-weight: normal;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	/* VulfMonoBlack family */
+	@font-face {
+		font-family: 'VulfMonoBlackDemo';
+		src: url('/fonts/VulfMonoDemo-Black.otf') format('opentype');
+		font-weight: bold;
+		font-style: bold;
+		font-display: swap;
+	}
+
+	/* VulfSans family */
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Regular.otf') format('opentype');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Light.otf') format('opentype');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Bold.otf') format('opentype');
+		font-weight: bold;
+		font-style: bold;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'VulfSansDemo';
+		src: url('/fonts/VulfSansDemo-Italic.otf') format('opentype');
+		font-weight: normal;
+		font-style: italic;
+		font-display: swap;
+	}
+
 	:root {
-  		--accent: 255, 165, 0; /* Orange */
-		--accent-light: 250, 128, 114; /* Salmony orange */
+  		--accent: 204, 133, 0;
+		--accent-light: 219, 94, 114; 
 		/* --accent-dark: 49, 10, 101; */
 		--accent-gradient: linear-gradient(
 			45deg,
@@ -72,6 +122,17 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		background: #008080;
 		background-size: 224px;
 	}
+
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 1200px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+
 	code {
 		font-family:
 			Menlo,

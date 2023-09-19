@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
       ) : (
         <div className={styles["nav__list"]}>
           <a href="/" className={styles["nav__list__item"]}>
-            Home
+            Home <span className="emoji">🏠</span>
           </a>
           {allNavItems.map((item) => (
             <a
@@ -63,7 +63,8 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
               href={item.frontmatter.href}
               className={styles["nav__list__item"]}
             >
-              {item.frontmatter.title}
+              {item.frontmatter.title}{" "}
+              <span className="emoji">{item.frontmatter.emoji}</span>
             </a>
           ))}
         </div>

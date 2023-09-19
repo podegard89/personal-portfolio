@@ -11,8 +11,9 @@
 
 .nav__list__item {
   text-decoration: none;
+  word-spacing: -0.25rem;
   color: #333;
-  margin: 0 15px; /* Adjust the horizontal spacing as needed */
+  margin: 0 10px; /* Adjust the horizontal spacing as needed */
   position: relative; /* Needed for the underline animation */
   border-bottom: 2px solid transparent; /* Transparent border by default */
   transition: color 0.3s, border-color 0.3s; /* Add smooth transitions */
@@ -22,6 +23,15 @@
   color: #ffa500; /* Change the link color on hover */
   border-color: #ffa500; /* Change border color on hover */
 }
+
+.emoji {
+  visibility: hidden;
+  display: none;
+}
+
+/* .nav__list__item:hover > .emoji {
+  display: block;
+} */
 
 /* Style for the mobile menu container */
 .mobile-menu {
