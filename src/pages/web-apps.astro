@@ -1,26 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import * as description from '../content/home-content/description.md';
+// import Card from '../components/Card.astro';
+import * as category from '../content/nav-items/web-apps.md';
 
-const allNavItems = await Astro.glob('../content/nav-items/*.md');
+const {title} = category.frontmatter;
+
+if (typeof title !== 'string') {
+    throw new Error('title is not a string');
+}
 ---
 
 <Layout title="Nice lol">
 	<main>
-		<h1><span class="text-gradient">Pearce Odegard</span></h1>
-		<h2>Freelance Developer and Tech Instructor</h2>
-
-		<div class="description" set:html={description.compiledContent()}/>
-		<ul role="list" class="link-card-flex">
-			{
-				allNavItems.map((item) => (
-					<Card 
-					href={item.frontmatter.href} 
-					title={item.frontmatter.title} 
-					body={item.frontmatter.body} 
-					/>))
-			}
+		<h1>{title}</h1>  
+		<ul role="list" class="link-card-grid">
 		</ul>
 	</main>
 </Layout>
@@ -65,14 +58,14 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 		background-size: 400%;
 		background-position: 0%;
 	}
-	.description {
+	.instructions {
 		margin-bottom: 2rem;
 		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent), 66%), rgba(var(--accent-light), 33%));
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
 		padding: 1.5rem;
 		border-radius: 8px;
 	}
-	.description code {
+	.instructions code {
 		font-size: 0.8em;
 		font-weight: bold;
 		background: rgba(var(--accent-light), 12%);
@@ -83,10 +76,10 @@ const allNavItems = await Astro.glob('../content/nav-items/*.md');
 	.instructions strong {
 		color: rgb(var(--accent-light));
 	}
-	.link-card-flex {
+	.link-card-grid {
 		display: flex;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
 		gap: 2rem;
-		justify-content: space-between;
 		padding: 0;
 	}
 </style>

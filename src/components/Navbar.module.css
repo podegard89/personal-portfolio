@@ -1,0 +1,64 @@
+/* Reset some default styles */
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+}
+
+.nav__list__item {
+  text-decoration: none;
+  color: #333;
+  margin: 0 15px; /* Adjust the horizontal spacing as needed */
+  position: relative; /* Needed for the underline animation */
+  border-bottom: 2px solid transparent; /* Transparent border by default */
+  transition: color 0.3s, border-color 0.3s; /* Add smooth transitions */
+}
+
+.nav__list__item:hover {
+  color: #ffa500; /* Change the link color on hover */
+  border-color: #ffa500; /* Change border color on hover */
+}
+
+/* Style for the mobile menu container */
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #333; /* Background color for the mobile menu */
+}
+
+/* Style for the hamburger button */
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white; /* Color for the hamburger icon */
+  cursor: pointer;
+}
+
+/* Style for the menu list in the mobile menu */
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+/* Style for individual mobile menu items */
+.menu-list a {
+  text-decoration: none;
+  color: white; /* Color for the mobile menu links */
+  margin: 5px 0; /* Adjust the vertical spacing as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  transition: color 0.3s; /* Add a color transition on hover */
+}
+
+/* Style for mobile menu links on hover */
+.menu-list a:hover {
+  color: #007bff; /* Change the link color on hover */
+}

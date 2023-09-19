@@ -1,0 +1,1 @@
+I am a freelance developer and tech instructor. I specialize in full-stack web development. I have a passion for teaching, with experience teaching online classes for [LaunchCode](https://www.launchcode.org/).
