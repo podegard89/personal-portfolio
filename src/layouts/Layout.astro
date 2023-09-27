@@ -115,6 +115,24 @@ console.log(slideAnim.forwards.new);
         font-display: swap;
       }
 
+      ::-webkit-scrollbar {
+        width: 1.5em;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgb(var(--accent-light));
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #ffffff;
+        border: 0.25em solid rgb(var(--accent-light));
+        border-radius: 1em;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+
       :root {
         --accent: 204, 133, 0;
         --accent-light: 219, 94, 114;
@@ -124,11 +142,17 @@ console.log(slideAnim.forwards.new);
           rgb(var(--accent-light)) 33%,
           rgb(var(--accent))
         );
+        --accent-gradient-reverse: linear-gradient(
+          to top,
+          rgb(var(--accent-light)),
+          rgb(var(--accent))
+        );
       }
       html {
         font-family: "VulfMonoDemo", sans-serif;
         background: #008080;
         background-size: 224px;
+        overflow-y: scroll;
       }
 
       main {
