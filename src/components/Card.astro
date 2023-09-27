@@ -1,91 +1,87 @@
 ---
 interface Props {
-	title: string;
-	body: string;
-	href: string;
+  title: string;
+  body: string;
+  href: string;
 }
 
 const { href, title } = Astro.props;
 ---
 
 <div class="link-card">
-	<a  href={href}>
-		<h2>
-			<span>{title}</span>
-			<!-- <span>&nbsp;&#128073;</span> -->
-		</h2>
-		<!-- <p set:html={body}>
+  <a href={href}>
+    <h2>
+      <span>{title}</span>
+      <!-- <span>&nbsp;&#128073;</span> -->
+    </h2>
+    <!-- <p set:html={body}>
 		</p> -->
-	</a>
+  </a>
 </div>
 <style>
-	.link-card {
-		font-size: smaller;
-		list-style: none;
-		display: flex;
-		justify-content: center;
-		padding: 1px;
-		max-width: calc(33.33% - 20px);
-		background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
-		background-size: 400%;
-		background-position: 100%;
-		transition: background-position 0.7s ease;
-		z-index: 1;
-		position: relative;
-  		border-radius: 50%;
-	}
+  .link-card {
+    font-size: smaller;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 1px;
+    background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
+    background-size: 400%;
+    background-position: 100%;
+    transition: background-position 0.7s ease;
+    z-index: 1;
+    position: relative;
+    border-radius: 50%;
+  }
 
-.link-card::before {
-  border-radius: 50%;
-  position: absolute;
-  content: "";
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: linear-gradient(
-    to top,
-    rgba(var(--accent-light)),
-    rgba(var(--accent-light))
-  );
-  z-index: -1;
-  transition: opacity 0.5s linear;
-  opacity: 0;
-}
+  .link-card::before {
+    border-radius: 50%;
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(
+      to top,
+      rgba(var(--accent-light)),
+      rgba(var(--accent-light))
+    );
+    z-index: -1;
+    transition: opacity 0.5s linear;
+    opacity: 0;
+  }
 
-.link-card:hover::before {
-  opacity: 1;
-}
+  .link-card:hover::before {
+    opacity: 1;
+  }
 
-.link-card > a {
-  /* Add equal width and height to create a perfect square */
-  width: 200px; /* You can adjust this value */
-  height: 200px; /* You can adjust this value */
-  text-decoration: none;
-  display: flex; /* Center content vertically */
-  flex-direction: column; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  justify-content: center; /* Center content vertically */
-  color: white;
-  transition: color 0.5s ease;
-  text-align: center;
-  align-items: center;
-}
+  .link-card > a {
+    /* Add equal width and height to create a perfect square */
+    width: 200px; /* You can adjust this value */
+    height: 200px; /* You can adjust this value */
+    text-decoration: none;
+    display: flex; /* Center content vertically */
+    flex-direction: column; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    color: white;
+    transition: color 0.5s ease;
+    text-align: center;
+    align-items: center;
+  }
 
-.link-card > a:hover {
-  color: var(--accent);
-}
+  .link-card > a:hover {
+    color: var(--accent);
+  }
 
-h2 {
-  margin: 0; /* Remove auto margin */
-  font-size: 1.25rem;
-}
+  h2 {
+    margin: 0; /* Remove auto margin */
+    font-size: 1.25rem;
+  }
 
-p {
-  margin-top: 0.5rem;
-  margin-bottom: 0;
-}
-
-
-
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
 </style>

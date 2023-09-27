@@ -1,7 +1,7 @@
 ---
 href: /work-history/
-titleLines: ——— Work History ———
 title: Work History
+subHeading: Work History
 body: See a timeline of my technical and non-technical work history.
 emoji: 🏢
 ---

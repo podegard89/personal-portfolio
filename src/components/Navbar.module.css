@@ -1,51 +1,114 @@
 /* Reset some default styles */
 .nav {
-  display: inline-block;
-  border: 2px solid #333; /* Add a transparent border */
+  display: flex;
+  justify-content: center;
+  border: 2px solid transparent; /* Add a transparent border */
   border-radius: 8px; /* Set border radius to 8 pixels */
-  padding: 1rem; /* Add padding as needed */
+  /* padding: 1rem;  */
   transition: border-color 0.3s;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  font-family: "VulfMonoDemo";
+  /* position: absolute;
+  left: 20px;
+  top: 20px; */
 }
 
 /* Set the border color to match the text color on hover */
-.nav:hover {
-  border-color: #ffa500; /* Match the text color (#ffa500 is orange) */
-}
+/* .nav:hover {
+  border-color: #ffa500;
+} */
 
 .nav-container {
-  text-align: center;
+  background-color: var(--accent-light);
 }
 
 .nav__list {
   display: flex;
-  align-items: center;
+  /* flex-direction: column; */
+  gap: 1rem;
+  /* overflow: hidden; */
+}
+
+.nav__list__filler {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
+  transition: background-position 0.7s ease;
+  z-index: 1;
+  border-radius: 50%;
+  width: 123px;
+  height: 123px;
 }
 
 .nav__list__item {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 1px;
+  background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
+  background-size: 400%;
+  background-position: 100%;
+  transition: background-position 0.7s ease;
+  z-index: 1;
+  position: relative;
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+}
+
+.nav__list__item::before {
+  border-radius: 50%;
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to top,
+    rgba(var(--accent-light)),
+    rgba(var(--accent-light))
+  );
+  z-index: -1;
+  transition: opacity 0.5s linear;
+  opacity: 0;
+}
+
+.nav__list__item:hover::before {
+  opacity: 1;
+}
+
+.nav__list__item > a {
+  /* Add equal width and height to create a perfect square */
+  width: 140px; /* You can adjust this value */
+  height: 140px; /* You can adjust this value */
+  text-decoration: none;
+  color: white;
+  display: flex;
+  flex-direction: column; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  justify-content: center;
+  transition: color 0.5s ease;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.menu__list__item {
   text-decoration: none;
   word-spacing: -0.25rem;
   color: #333;
   margin: 0 15px; /* Adjust the horizontal spacing as needed */
   position: relative; /* Needed for the underline animation */
-  border-bottom: 2px solid transparent; /* Transparent border by default */
+  border-top: 2px solid transparent; /* Transparent border by default */
+  border-bottom: 2px solid transparent;
   transition: color 0.3s, border-color 0.3s; /* Add smooth transitions */
 }
 
-.nav__list__item:hover {
+.menu__list__item:hover {
   color: #ffa500; /* Change the link color on hover */
   border-color: #ffa500; /* Change border color on hover */
-}
-
-.emoji {
-  visibility: hidden;
-  opacity: 0; /* Start with zero opacity */
-  transition: visibility 0s, opacity 0.3s ease-in-out; /* Add transition for opacity */
-}
-
-.nav__list__item:hover > .emoji {
-  visibility: visible; /* Make the emoji visible on hover */
-  opacity: 1; /* Fade in the emoji on hover */
 }
 
 /* Style for the mobile menu container */
@@ -54,7 +117,8 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  background-color: #333; /* Background color for the mobile menu */
+  background-color: #333;
+  border-radius: 8px; /* Background color for the mobile menu */
 }
 
 /* Style for the hamburger button */
