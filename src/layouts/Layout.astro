@@ -3,19 +3,29 @@ import { ViewTransitions, slide } from "astro:transitions";
 import Navbar from "../components/Navbar";
 interface Props {
   title: string;
-  subHeading: string;
 }
 
-const { title, subHeading } = Astro.props;
+const { title } = Astro.props;
 
 const allNavItems = await Astro.glob("../content/nav-items/*.md");
 
 const slideAnim = slide({ duration: "0.5s" });
-console.log(slideAnim.forwards.old);
-console.log(slideAnim.forwards.new);
 ---
 
-<!doctype html>
+<script>
+  document.addEventListener("astro:after-swap", () => {
+    console.log("navigation triggered");
+  });
+
+  // window.onscroll = function () {
+  //   const main = document.querySelector("main");
+  //   if (window.scrollY !== 0) {
+  //     main!.style.paddingTop = "100px";
+  //     console.log("scrolling");
+  //   }
+  // };
+</script>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -23,15 +33,19 @@ console.log(slideAnim.forwards.new);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="icon" href="http://example.com/favicon.png" />
     <ViewTransitions />
   </head>
   <body>
-    <h1><span class="text-gradient">Pearce Odegard</span></h1>
+    <!-- <h1><span class="text-gradient">Pearce Odegard</span></h1> -->
     <!-- <h2 transition:animate={slide({ duration: "0.5s" })}>{subHeading}</h2> -->
 
+    <div class="page-indicator">
+      <div class="pointer"></div>
+    </div>
     <Navbar allNavItems={allNavItems} client:load />
 
-    <main transition:animate={slide({ duration: "0.5s" })}>
+    <main transition:animate={slideAnim}>
       <slot />
     </main>
     <style is:global>
@@ -133,8 +147,15 @@ console.log(slideAnim.forwards.new);
         background: #333;
       }
 
+      @supports (scrollbar-color: #ffffff #ffffff) {
+        * {
+          scrollbar-color: #ffffff rgb(var(--accent-light));
+        }
+      }
+
       :root {
         --accent: 204, 133, 0;
+        --accent-alt: 255, 165, 0;
         --accent-light: 219, 94, 114;
         /* --accent-dark: 49, 10, 101; */
         --accent-gradient: linear-gradient(
@@ -153,6 +174,7 @@ console.log(slideAnim.forwards.new);
         background: #008080;
         background-size: 224px;
         overflow-y: scroll;
+        overflow-x: hidden;
       }
 
       main {
@@ -176,6 +198,24 @@ console.log(slideAnim.forwards.new);
           Courier New,
           monospace;
       }
+      .page-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1.5em; /* Adjust the height as needed */
+        background-color: rgb(var(--accent-light));
+        text-align: center;
+        font-size: 16px;
+        z-index: 100;
+      }
+
+      .heading {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
       h1 {
         font-size: 4rem;
         font-weight: 700;

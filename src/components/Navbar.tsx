@@ -9,6 +9,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [stickyNav, setStickyNav] = useState<boolean>(false);
 
   useEffect(() => {
     const checkScreenWidth = () => {
@@ -24,12 +25,19 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
     };
   }, []);
 
+  // useEffect(() => {
+  //   window.onscroll = () => {
+  //     setStickyNav(!(window.scrollY === 0));
+  //     return () => (window.onscroll = null);
+  //   };
+  // }, []);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <div className={styles["nav-container"]}>
+    <div className={`${styles["nav-container"]}`}>
       {isMobile ? (
         <div className={styles["mobile-menu"]} onClick={toggleMenu}>
           <button className={styles["menu-button"]}>☰</button>
@@ -53,11 +61,24 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
       ) : (
         <nav className={styles.nav}>
           <div className={styles["nav__list"]}>
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
+            <div className={`${styles.nav__list__filler} ${styles.start}`}>
+              P
+            </div>
+            <div className={`${styles.nav__list__filler} ${styles.start}`}>
+              E
+            </div>
+            <div className={`${styles.nav__list__filler} ${styles.start}`}>
+              A
+            </div>
+            <div className={`${styles.nav__list__filler} ${styles.start}`}>
+              R
+            </div>
+            <div className={`${styles.nav__list__filler} ${styles.start}`}>
+              C
+            </div>
+            <div className={`${styles.nav__list__filler} ${styles.start}`}>
+              E
+            </div>
             {allNavItems.map((item) => (
               <div
                 className={styles["nav__list__item"]}
@@ -68,11 +89,13 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
                 </a>
               </div>
             ))}
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
-            <div className={styles["nav__list__filler"]}></div>
+            <div className={styles["nav__list__filler"]}>O</div>
+            <div className={styles["nav__list__filler"]}>D</div>
+            <div className={styles["nav__list__filler"]}>E</div>
+            <div className={styles["nav__list__filler"]}>G</div>
+            <div className={styles["nav__list__filler"]}>A</div>
+            <div className={styles["nav__list__filler"]}>R</div>
+            <div className={styles["nav__list__filler"]}>D</div>
           </div>
         </nav>
       )}

@@ -1,0 +1,123 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import * as navItem from "../../content/nav-items/4-contact-me.md";
+
+const { title } = navItem.frontmatter;
+---
+
+<Layout title={title}>
+  <div class="main-content">
+    <form action="/contact-success" method="POST">
+      <h2>Let's get in touch!</h2>
+      <input
+        class="text-input"
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email"
+      />
+      <input
+        class="text-input"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Name"
+      />
+      <input
+        class="text-input"
+        type="text"
+        name="business"
+        id="business"
+        placeholder="Business"
+        autocomplete="off"
+      />
+      <textarea
+        class="text-input"
+        name="message"
+        id="message"
+        placeholder="Message"
+        rows="10"
+        cols="50"></textarea>
+      <p>↓ Scroll down to review terms and send your message ↓</p>
+
+      <div class="submit-section">
+        <label for="acceptTerms" class="checkbox-label">
+          <input type="checkbox" id="acceptTerms" name="acceptTerms" />
+           I have read and agree to the <a href="/legal/terms"
+            >Terms of Service</a
+          >
+           and <a href="/legal/privacy-policy">Privacy Policy</a>.
+        </label>
+        <button class="submit">Send</button>
+      </div>
+    </form>
+  </div>
+</Layout>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-image: var(--accent-gradient);
+    border: rgb(var(--accent-alt)) 2px solid;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: "VulfSansDemo", monospace;
+  }
+
+  .text-input {
+    width: 60%;
+    padding: 1rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .text-input::placeholder {
+    font-style: italic;
+  }
+
+  button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    background: rgb(var(--accent-light));
+    color: white;
+    border: white 2px solid;
+    box-shadow: none;
+    transition: box-shadow 0.2s ease-in-out;
+    font-family: "VulfMonoDemo", monospace;
+    font-style: italic;
+    cursor: pointer;
+  }
+
+  button:hover {
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset,
+      rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
+  }
+
+  .submit-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
+    position: relative; /* Needed for the underline animation */
+    border-bottom: 2px solid transparent; /* Transparent border by default */
+    transition:
+      color 0.3s,
+      border-color 0.3s; /* Add smooth transitions */
+    font-weight: bold;
+  }
+  a:hover {
+    border-bottom-color: #333;
+  }
+</style>

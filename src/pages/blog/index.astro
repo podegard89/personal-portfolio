@@ -1,16 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 // import Card from '../components/Card.astro';
-import * as navItem from "../content/nav-items/3-projects.md";
+import * as navItem from "../../content/nav-items/3-blog.md";
 
-const { title, subHeading } = navItem.frontmatter;
+const { title } = navItem.frontmatter;
 
 if (typeof title !== "string") {
   throw new Error("title is not a string");
 }
 ---
 
-<Layout title={title} subHeading={subHeading}>
+<Layout title={title}>
   <main>
     <ul role="list" class="link-card-grid"></ul>
   </main>

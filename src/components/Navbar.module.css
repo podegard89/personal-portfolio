@@ -8,18 +8,41 @@
   transition: border-color 0.3s;
   /* margin: 0 auto; */
   font-family: "VulfMonoDemo";
-  /* position: absolute;
-  left: 20px;
-  top: 20px; */
 }
-
-/* Set the border color to match the text color on hover */
-/* .nav:hover {
-  border-color: #ffa500;
-} */
 
 .nav-container {
   background-color: var(--accent-light);
+  /* position: relative; */
+  z-index: 99;
+  background: #008080;
+  position: sticky;
+  top: 1.5rem;
+  padding: 1rem;
+}
+
+/* .nav-container.sticky {
+  position: fixed;
+} */
+
+.pointer {
+  position: relative;
+  left: 50%;
+  bottom: 100%;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent; /* Adjust the size of the triangle */
+  border-right: 20px solid transparent; /* Adjust the size of the triangle */
+  border-top: 30px solid rgba(var(--accent-light)); /* Color of the pointer, should match the indicator background color */
+  transform: translateX(-50%);
+  /* margin-bottom: 0.3rem; */
+}
+
+.nav-container.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .nav__list {
@@ -35,11 +58,19 @@
   justify-content: center;
   margin: auto;
   background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
-  transition: background-position 0.7s ease;
   z-index: 1;
   border-radius: 50%;
-  width: 123px;
-  height: 123px;
+  width: 75px;
+  height: 75px;
+  align-items: center;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: white;
+}
+
+.start {
+  width: 85px;
+  height: 85px;
 }
 
 .nav__list__item {
@@ -56,6 +87,8 @@
   border-radius: 50%;
   width: 140px;
   height: 140px;
+  border: #ffa500 2px solid;
+  color: white;
 }
 
 .nav__list__item::before {
@@ -74,6 +107,8 @@
   z-index: -1;
   transition: opacity 0.5s linear;
   opacity: 0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .nav__list__item:hover::before {
@@ -85,7 +120,6 @@
   width: 140px; /* You can adjust this value */
   height: 140px; /* You can adjust this value */
   text-decoration: none;
-  color: white;
   display: flex;
   flex-direction: column; /* Center content vertically */
   align-items: center; /* Center content horizontally */
@@ -93,6 +127,7 @@
   transition: color 0.5s ease;
   text-align: center;
   font-size: 1.3rem;
+  color: inherit;
 }
 
 .menu__list__item {

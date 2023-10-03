@@ -4,10 +4,10 @@ import { Image } from "astro:assets";
 import localHeadshotImage from "../images/headshot.jpg";
 import * as navItem from "../content/nav-items/1-home.md";
 
-const { title, subHeading } = navItem.frontmatter;
+const { title } = navItem.frontmatter;
 ---
 
-<Layout title={title} subHeading={subHeading}>
+<Layout title={title}>
   <div class="main-content">
     <div class="image-container">
       <Image class="headshot" src={localHeadshotImage} alt="Pearce Odegard" />
@@ -15,9 +15,10 @@ const { title, subHeading } = navItem.frontmatter;
     <div class="content-container">
       <div class="description">
         <p>
-          Hi, I'm Pearce! I'm a full-stack web developer who uses a variety of
-          technologies built around <em>Node.js</em> and <em>TypeScript</em>
-           including: <em>Next.js</em>, <em>Astro</em>, and <em>Puppeteer</em>.
+          Hi, I'm Pearce! I'm a web developer who uses a variety of technologies
+          built around <em>Node.js</em> and <em>TypeScript</em>, including: <em
+            >Next.js</em
+          >, <em>Astro</em>, and <em>Puppeteer</em>.
         </p>
         <p>
           I also have a passion for teaching, having instructed remote web
@@ -25,6 +26,10 @@ const { title, subHeading } = navItem.frontmatter;
           <em>C#</em> at <a class="" href="https://www.launchcode.org/"
             >LaunchCode</a
           >.
+        </p>
+        <p>
+          See the <a href="/blog">Blog</a> for more detailed posts on my
+          projects and work history.
         </p>
       </div>
     </div>
@@ -56,6 +61,19 @@ const { title, subHeading } = navItem.frontmatter;
 		leaning toward just next it without this circle() rule */
     /* shape-outside: circle(); */
     margin: 20px;
+    /* messing around with color shadow */
+    /* box-shadow:
+      rgb(var(--accent-light)) 0px 0px 0px 3px,
+      rgb(var(--accent-alt)) 0px 0px 0px 6px,
+      rgb(var(--accent-light)) 0px 0px 0px 9px,
+      rgb(var(--accent-alt)) 0px 0px 0px 12px,
+      rgb(var(--accent-light)) 0px 0px 0px 15px; */
+    box-shadow:
+      rgba(0, 0, 0, 0.09) 0px 2px 1px,
+      rgba(0, 0, 0, 0.09) 0px 4px 2px,
+      rgba(0, 0, 0, 0.09) 0px 8px 4px,
+      rgba(0, 0, 0, 0.09) 0px 16px 8px,
+      rgba(0, 0, 0, 0.09) 0px 32px 16px;
   }
   h2 {
     font-size: 2rem;
@@ -83,6 +101,7 @@ const { title, subHeading } = navItem.frontmatter;
     transition:
       color 0.3s,
       border-color 0.3s; /* Add smooth transitions */
+    font-weight: bold;
   }
 
   .description > p > a:hover {
@@ -121,10 +140,7 @@ const { title, subHeading } = navItem.frontmatter;
       height: auto;
       border-radius: 50%;
       max-width: 100%;
-      float: left;
-      /* Still not convinced on whether I want the text to follow the circle shape of the image or just be next to it
-			leaning toward just next it without this circle() rule */
-      /* shape-outside: circle(); */
+      /* float: left; */
       margin: auto;
     }
   }

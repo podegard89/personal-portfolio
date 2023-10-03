@@ -1,7 +1,6 @@
 ---
 title: Lead Instructor
-employer: LaunchCode
-courseName: Cleared Talent CodeCamp
+employer: Cleared Talent CodeCamp
 startDate: October 2022
 endDate: March 2023
 ---
