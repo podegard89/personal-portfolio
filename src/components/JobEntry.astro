@@ -19,15 +19,15 @@ const { title, employer, startDate, endDate } = jobEntry.frontmatter;
     </div>
     <div class="sub-heading-container">
       <h2 class="heading-label">Employer</h2>
-      <p id="employer" class="heading-content">
+      <h2 id="employer" class="heading-content">
         {employer}
-      </p>
+      </h2>
     </div>
     <div class="sub-heading-container">
       <h2 class="heading-label">Duration</h2>
-      <p id="date-range" class="heading-content">
+      <h2 id="date-range" class="heading-content">
         {startDate + " - " + endDate}
-      </p>
+      </h2>
     </div>
   </div>
   <Fragment class="job-description" set:html={jobEntry.compiledContent()} />
@@ -51,6 +51,7 @@ const { title, employer, startDate, endDate } = jobEntry.frontmatter;
   .heading-label {
     text-align: left;
     margin-bottom: 0;
+    font-style: italic;
   }
   .heading-content {
     text-align: left;

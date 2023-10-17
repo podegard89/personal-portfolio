@@ -1,0 +1,192 @@
+---
+import type { MarkdownInstance } from "astro";
+interface Props {
+  allNavItems: MarkdownInstance<Record<string, any>>[];
+}
+
+const { allNavItems } = Astro.props;
+---
+
+<nav class=".nav">
+  <div class="nav__list">
+    <div class="nav__list__filler start">P</div>
+    <div class="nav__list__filler start">E</div>
+    <div class="nav__list__filler start">A</div>
+    <div class="nav__list__filler start">R</div>
+    <div class="nav__list__filler start">C</div>
+    <div class="nav__list__filler start">E</div>
+    {
+      allNavItems.map((item) => (
+        <div class="nav__list__item">
+          <a href={item.frontmatter.href}>{item.frontmatter.title} </a>
+        </div>
+      ))
+    }
+    <div class="nav__list__filler">O</div>
+    <div class="nav__list__filler">D</div>
+    <div class="nav__list__filler">E</div>
+    <div class="nav__list__filler">G</div>
+    <div class="nav__list__filler">A</div>
+    <div class="nav__list__filler">R</div>
+    <div class="nav__list__filler">D</div>
+  </div>
+</nav>
+
+<style>
+  /* Reset some default  */
+  .nav {
+    display: flex;
+    justify-content: center;
+    border: 2px solid transparent; /* Add a transparent border */
+    border-radius: 8px; /* Set border radius to 8 pixels */
+    /* padding: 1rem;  */
+    transition: border-color 0.3s;
+    /* margin: 0 auto; */
+    font-family: "VulfMonoDemo";
+  }
+
+  .nav-container {
+    background-color: var(--accent-light);
+    /* position: relative; */
+    z-index: 99;
+    background: #008080;
+    /* position: sticky; */
+    top: 1.5rem;
+    padding: 1rem;
+  }
+
+  /* .nav-container.sticky {
+  position: fixed;
+} */
+
+  .pointer {
+    position: relative;
+    left: 50%;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent; /* Adjust the size of the triangle */
+    border-right: 20px solid transparent; /* Adjust the size of the triangle */
+    border-top: 30px solid rgba(var(--accent-light)); /* Color of the pointer, should match the indicator background color */
+    transform: translateX(-50%);
+    /* margin-bottom: 0.3rem; */
+  }
+
+  .nav-container.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .nav__list {
+    display: flex;
+    /* flex-direction: column; */
+    gap: 1rem;
+    /* overflow: hidden; */
+  }
+
+  .nav__list__filler {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
+    z-index: 1;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    align-items: center;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: white;
+  }
+
+  .start {
+    width: 85px;
+    height: 85px;
+  }
+
+  .nav__list__item {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 1px;
+    background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
+    background-size: 400%;
+    background-position: 100%;
+    transition: background-position 0.7s ease;
+    z-index: 1;
+    position: relative;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    border: #ffa500 2px solid;
+    color: white;
+  }
+
+  .nav__list__item::before {
+    border-radius: 50%;
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(
+      to top,
+      rgba(var(--accent-light)),
+      rgba(var(--accent-light))
+    );
+    z-index: -1;
+    transition: opacity 0.5s linear;
+    opacity: 0;
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  }
+
+  .nav__list__item:hover::before {
+    opacity: 1;
+  }
+
+  .nav__list__item > a {
+    /* Add equal width and height to create a perfect square */
+    width: 140px; /* You can adjust this value */
+    height: 140px; /* You can adjust this value */
+    text-decoration: none;
+    display: flex;
+    flex-direction: column; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center;
+    transition: color 0.5s ease;
+    text-align: center;
+    font-size: 1.3rem;
+    color: inherit;
+  }
+  @media only screen and (max-width: 768px) {
+    .nav__list__item {
+      text-decoration: none;
+      word-spacing: -0.25rem;
+      color: white;
+      margin: 0 15px;
+      position: relative;
+      /* border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent; */
+      transition:
+        color 0.3s,
+        border-color 0.3s;
+    }
+
+    .nav__list__filler {
+      display: none;
+      visibility: hidden;
+    }
+
+    .start {
+      display: none;
+      visibility: hidden;
+    }
+  }
+</style>
