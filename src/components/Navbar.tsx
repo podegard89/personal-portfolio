@@ -4,33 +4,15 @@ import type { MarkdownInstance } from "astro";
 
 interface NavbarProps {
   allNavItems: MarkdownInstance<Record<string, any>>[];
+  initialPage: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
+const Navbar: React.FC<NavbarProps> = ({ allNavItems, initialPage }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [stickyNav, setStickyNav] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<string>(initialPage);
 
-  useEffect(() => {
-    const checkScreenWidth = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
-    };
-
-    checkScreenWidth();
-
-    window.addEventListener("resize", checkScreenWidth);
-
-    return () => {
-      window.removeEventListener("resize", checkScreenWidth);
-    };
-  }, []);
-
-  // useEffect(() => {
-  //   window.onscroll = () => {
-  //     setStickyNav(!(window.scrollY === 0));
-  //     return () => (window.onscroll = null);
-  //   };
-  // }, []);
+  console.log(currentPage);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -81,11 +63,18 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems }) => {
             </div>
             {allNavItems.map((item) => (
               <div
-                className={styles["nav__list__item"]}
+                className={`${styles["nav__list__item"]}`}
                 key={item.frontmatter.href}
+                onClick={() => setCurrentPage(item.frontmatter.href)}
+                style={{
+                  background:
+                    currentPage === item.frontmatter.href
+                      ? "rgba(var(--accent-light))"
+                      : "",
+                }}
               >
                 <a key={item.frontmatter.href} href={item.frontmatter.href}>
-                  {item.frontmatter.title}{" "}
+                  {item.frontmatter.title}
                 </a>
               </div>
             ))}

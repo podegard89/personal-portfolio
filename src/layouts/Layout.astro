@@ -9,6 +9,7 @@ const { title } = Astro.props;
 
 const allNavItems = await Astro.glob("../content/nav-items/*.md");
 
+
 // const slideAnim = slide({ duration: "0.5s" });
 ---
 
@@ -42,7 +43,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
     <!-- <h2 transition:animate={slide({ duration: "0.5s" })}>{subHeading}</h2> -->
     <header transition:animate="none">
       <div class="page-indicator"></div>
-      <Navbar allNavItems={allNavItems} client:load transition:persist />
+      <Navbar allNavItems={allNavItems} initialPage={Astro.url.pathname} client:load transition:persist />
     </header>
     <main>
       <slot />
