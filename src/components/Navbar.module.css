@@ -81,7 +81,7 @@
   background: linear-gradient(rgba(var(--accent)), rgba(var(--accent-light)));
   background-size: 400%;
   background-position: 100%;
-  transition: background-position 0.7s ease;
+  transition: background-position 0.2s ease;
   z-index: 1;
   position: relative;
   border-radius: 50%;
@@ -105,7 +105,7 @@
     rgba(var(--accent-light))
   );
   z-index: -1;
-  transition: opacity 0.5s linear;
+  transition: opacity 0.2s linear;
   opacity: 0;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
@@ -124,7 +124,7 @@
   flex-direction: column; /* Center content vertically */
   align-items: center; /* Center content horizontally */
   justify-content: center;
-  transition: color 0.5s ease;
+  transition: color 0.2s ease;
   text-align: center;
   font-size: 1.3rem;
   color: inherit;
