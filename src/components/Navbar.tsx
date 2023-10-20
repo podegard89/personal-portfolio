@@ -61,23 +61,28 @@ const Navbar: React.FC<NavbarProps> = ({ allNavItems, initialPage }) => {
             <div className={`${styles.nav__list__filler} ${styles.start}`}>
               E
             </div>
-            {allNavItems.map((item) => (
-              <div
-                className={`${styles["nav__list__item"]}`}
-                key={item.frontmatter.href}
-                onClick={() => setCurrentPage(item.frontmatter.href)}
-                style={{
-                  background:
-                    currentPage === item.frontmatter.href
-                      ? "rgba(var(--accent-light))"
-                      : "",
-                }}
-              >
-                <a key={item.frontmatter.href} href={item.frontmatter.href}>
-                  {item.frontmatter.title}
-                </a>
-              </div>
-            ))}
+            {allNavItems.map((item) => {
+              // this is necessary for potential sub-paths like /blog/some-post that may exist in the future,
+              // worth revisiting when sub-paths are introduced
+              const isActive =
+                currentPage === item.frontmatter.href ||
+                (currentPage.includes(item.frontmatter.href) &&
+                  item.frontmatter.href !== "/");
+              return (
+                <div
+                  className={`${styles["nav__list__item"]}`}
+                  key={item.frontmatter.href}
+                  onClick={() => setCurrentPage(item.frontmatter.href)}
+                  style={{
+                    background: isActive ? "rgba(var(--accent-light))" : "",
+                  }}
+                >
+                  <a key={item.frontmatter.href} href={item.frontmatter.href}>
+                    {item.frontmatter.title}
+                  </a>
+                </div>
+              );
+            })}
             <div className={styles["nav__list__filler"]}>O</div>
             <div className={styles["nav__list__filler"]}>D</div>
             <div className={styles["nav__list__filler"]}>E</div>
