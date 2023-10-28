@@ -5,7 +5,7 @@ startDate: May 2021
 endDate: March 2023
 ---
 
-Mentored a diverse portion of students from the following free full-time remote [LaunchCode](https://launchcode.org) CodeCamps:
+Mentored a diverse group of students from the following free full-time remote [LaunchCode](https://launchcode.org) CodeCamps:
 
 - **Philadelphia Immersive CodeCamp** | Oct 2022 - March 2023
 - **St. Louis Community College CodeCamp** | Sept 2021 - Feb 2022

@@ -5,12 +5,13 @@ import * as navItem from "../../content/nav-items/3-blog.md";
 
 const { title } = navItem.frontmatter;
 
-if (typeof title !== "string") {
-  throw new Error("title is not a string");
-}
+const sidebarItems = [
+  { name: "Contact", href: "#footer" },
+  { name: "Back to top", href: "#op" },
+];
 ---
 
-<Layout title={title}>
+<Layout title={title} sidebarItems={sidebarItems}>
   <main>
     <div class="coming-soon">Coming Soon!</div>
   </main>
@@ -50,5 +51,4 @@ if (typeof title !== "string") {
   .coming-soon {
     text-align: center;
   }
-
 </style>

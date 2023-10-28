@@ -1,8 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+
+const sidebarItems = [
+  { name: "Contact", href: "#footer" },
+  { name: "Back to top", href: "#top" },
+];
 ---
 
-<Layout title="Terms of Service">
+<Layout title="Terms of Service" sidebarItems={sidebarItems}>
   <div class="main-content">
     <h1>Terms of Service</h1>
     <h2>1. Acceptance of Terms</h2>

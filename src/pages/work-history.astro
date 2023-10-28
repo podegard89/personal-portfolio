@@ -6,11 +6,16 @@ import JobEntry from "../components/JobEntry.astro";
 
 const { title } = navItem.frontmatter;
 const jobEntries = await Astro.glob("../content/job-entries/*.md");
+
+const sidebarItems = [
+  { name: "Contact", href: "#footer" },
+  { name: "Back to top", href: "#top" },
+];
 ---
 
-<Layout title={title}>
+<Layout title={title} sidebarItems={sidebarItems}>
   <main>
-    <div class="timeline-container">
+    <div class="timeline-container" id="technical-work">
       {
         jobEntries.map((jobEntry, index) => {
           return (

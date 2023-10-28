@@ -1,8 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+
+const sidebarItems = [
+  { name: "Contact", href: "#footer" },
+  { name: "Back to top", href: "#top" },
+];
 ---
 
-<Layout title="Privacy Policy">
+<Layout title="Privacy Policy" sidebarItems={sidebarItems}>
   <div class="main-content">
     <h1>Privacy Policy</h1>
 
@@ -75,8 +80,8 @@ import Layout from "../../layouts/Layout.astro";
     <h2>8. Contact Us</h2>
     <p>
       If you have any questions about this Privacy Policy, the practices of the
-      Website, or your interactions with the Website, please contact us at
-      <span class="contact-email">contact.pearce.o@gmail.com</span>.
+      Website, or your interactions with the Website, please <a href="/contact"
+      ></a>contact us.
     </p>
   </div>
 </Layout>

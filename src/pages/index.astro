@@ -4,52 +4,118 @@ import { Image } from "astro:assets";
 import localHeadshotImage from "../images/headshot.jpg";
 import * as navItem from "../content/nav-items/1-home.md";
 
+type StackItem = {
+  name: string;
+  logo: string;
+};
 const { title } = navItem.frontmatter;
+const stackSVGs: StackItem[] = [
+  { name: "HTML", logo: "https://cdn.svgporn.com/logos/html-5.svg" },
+  { name: "CSS", logo: "https://cdn.svgporn.com/logos/css-3.svg" },
+  { name: "JavaScript", logo: "https://cdn.svgporn.com/logos/javascript.svg" },
+  {
+    name: "TypeScript",
+    logo: "https://cdn.svgporn.com/logos/typescript-icon.svg",
+  },
+  { name: "Git", logo: "https://cdn.svgporn.com/logos/git-icon.svg" },
+
+  { name: "Node.js", logo: "https://cdn.svgporn.com/logos/nodejs-icon.svg" },
+  {
+    name: "Express.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+  },
+  { name: "React.js", logo: "https://cdn.svgporn.com/logos/react.svg" },
+  { name: "Angular", logo: "https://cdn.svgporn.com/logos/angular-icon.svg" },
+  { name: "Astro", logo: "https://cdn.svgporn.com/logos/astro-icon.svg" },
+  { name: "Next.js", logo: "https://cdn.svgporn.com/logos/nextjs-icon.svg" },
+  {
+    name: "SQL",
+    logo: "https://www.svgrepo.com/show/331760/sql-database-generic.svg",
+  },
+  { name: "Puppeteer", logo: "https://cdn.svgporn.com/logos/puppeteer.svg" },
+  { name: "Java", logo: "https://cdn.svgporn.com/logos/java.svg" },
+  { name: "C#", logo: "https://cdn.svgporn.com/logos/c-sharp.svg" },
+  {
+    name: "ASP.NET Core",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
+  },
+];
+
+const sidebarItems = [
+  { name: "Introduction", href: "#top" },
+  { name: "Tech Stack", href: "#techstack" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#footer" },
+];
 ---
 
-<Layout title={title}>
+<Layout title={title} sidebarItems={sidebarItems}>
   <div class="main-content">
-    <div class="image-container">
-      <Image class="headshot" src={localHeadshotImage} alt="Pearce Odegard" />
-    </div>
-    <div class="content-container">
-      <div class="description">
-        <p>
-          Hi, I'm Pearce! I'm a web developer who uses a variety of technologies
-          built around <em>Node.js</em> and <em>TypeScript</em>, including: <em
-            >Next.js</em
-          >, <em>Astro</em>, and <em>Puppeteer</em>.
-        </p>
-        <p>
-          I also have a passion for teaching, having instructed remote web
-          development courses on <em>JavaScript</em>, <em>Java</em>, and
-          <em>C#</em> at <a class="" href="https://www.launchcode.org/"
-            >LaunchCode</a
-          >.
-        </p>
-        <p>
-          See the <a href="/blog">Blog</a> for more detailed posts on my
-          projects and work history.
-        </p>
+    <section id="introduction" class="intro-section">
+      <div class="image-container">
+        <Image class="headshot" src={localHeadshotImage} alt="Pearce Odegard" />
       </div>
-    </div>
+      <div class="content-container">
+        <h1>Hi, I'm <span class="highlight">Pearce Odegard</span>!</h1>
+        <div class="description">
+          <p>
+            I'm a web developer who builds software solutions centered around
+            the <em>Node.js</em> and <em>TypeScript</em>
+             ecosystem.
+          </p>
+          <p>
+            I am also an experienced communicator, leader, and educator. I have
+            taught remote web development courses on <em>JavaScript</em>,
+
+            <em>Java</em>, and <em>C#</em> (ASP.NET Core) for <a
+              href="https://launchcode.org">LaunchCode</a
+            >, as well as private music lessons for individuals of all ages.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="techstack" class="techstack-section">
+      <h2>Tech Stack</h2>
+      <div class="techstack">
+        {
+          stackSVGs.map((stackItem) => (
+            <div class="stack-item">
+              <Image
+                src={stackItem.logo}
+                alt={stackItem.name}
+                width="90"
+                height="90"
+                class="stack-logo"
+              />
+              <p>{stackItem.name}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+    <section id="projects" class="projects-section">
+      <h2>Recent Projects</h2>
+    </section>
   </div>
 </Layout>
 
 <style>
   h1 {
-    font-size: 4rem;
-    font-weight: 700;
+    font-size: 700;
     line-height: 1;
-    text-align: center;
-    font-family: "VulfMonoBlackDemo", sans-serif;
+    font-family: "VulfSansDemo", sans-serif;
   }
-  .text-gradient {
-    background-image: var(--accent-gradient);
+  h2 {
+    color: rgb(var(--accent-alt));
+  }
+  .highlight {
+    color: #ffa500;
+    /* background-image: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 400%;
-    background-position: 0%;
+    background-position: 0%; */
+    font-weight: 700;
   }
   .headshot {
     display: flex;
@@ -75,14 +141,25 @@ const { title } = navItem.frontmatter;
       rgba(0, 0, 0, 0.09) 0px 16px 8px,
       rgba(0, 0, 0, 0.09) 0px 32px 16px;
   }
-  h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    line-height: 1;
-    font-family: "VulfSansDemo", sans-serif;
-    text-align: center;
+
+  .main-siderbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
+
   .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    row-gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .intro-section {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -124,9 +201,49 @@ const { title } = navItem.frontmatter;
     gap: 2rem;
     padding: 0;
   }
+
+  .techstack-section {
+    max-width: 75%;
+  }
+
+  .techstack {
+    font-family: "VulfSansDemo", sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    row-gap: 1rem;
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
+    padding: 1rem;
+    padding-bottom: 0;
+    border-radius: 1em;
+    box-shadow:
+      rgba(0, 0, 0, 0.09) 0px 2px 1px,
+      rgba(0, 0, 0, 0.09) 0px 4px 2px,
+      rgba(0, 0, 0, 0.09) 0px 8px 4px,
+      rgba(0, 0, 0, 0.09) 0px 16px 8px,
+      rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .stack-item > p {
+    line-height: 1;
+    word-wrap: none;
+    white-space: nowrap;
+  }
+
   /* Mobile styles */
-  @media (max-width: 768px) {
-    .main-content {
+  @media (max-width: 1200px) {
+    .intro-section {
       flex-direction: column;
     }
 
@@ -142,6 +259,22 @@ const { title } = navItem.frontmatter;
       max-width: 100%;
       /* float: left; */
       margin: auto;
+    }
+
+    .techstack {
+      justify-content: space-evenly;
+      gap: 1rem;
+    }
+
+    .stack-item {
+      width: 85px;
+      height: 85px;
+      word-wrap: none;
+    }
+
+    .stack-logo {
+      width: 50px;
+      height: 50px;
     }
   }
 </style>

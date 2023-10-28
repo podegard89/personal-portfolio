@@ -1,14 +1,18 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Navbar from "../components/Navbar";
+import gitHubMark from "../images/github-mark.svg";
+import linkedInIcon from "../images/LinkedIn_icon.svg.png";
+import { Image } from "astro:assets";
+import Navbar from "../components/Navbar.astro";
+import Sidebar from "../components/Sidebar";
 interface Props {
   title: string;
+  sidebarItems: { name: string; href: string }[];
 }
 
-const { title } = Astro.props;
+const { title, sidebarItems } = Astro.props;
 
 const allNavItems = await Astro.glob("../content/nav-items/*.md");
-
 
 // const slideAnim = slide({ duration: "0.5s" });
 ---
@@ -27,27 +31,64 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
   // };
 </script>
 
-<html lang="en">
+<html lang="en" transition:animate={"none"}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Pearce Odegard" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link rel="icon" href="http://example.com/favicon.png" />
+    <link
+      rel="icon"
+      href="https://www.canva.com/design/DAFyfn0GgMI/ValEl7W4AwCD2Grw3EQbBg/view?utm_content=DAFyfn0GgMI&utm_campaign=designshare&utm_medium=link&utm_source=editor"
+    />
     <ViewTransitions />
   </head>
 
-  <body transition:animate={"slide"}>
-    <!-- <h1><span class="text-gradient">Pearce Odegard</span></h1> -->
-    <!-- <h2 transition:animate={slide({ duration: "0.5s" })}>{subHeading}</h2> -->
-    <header transition:animate="none">
-      <div class="page-indicator"></div>
-      <Navbar allNavItems={allNavItems} initialPage={Astro.url.pathname} client:load transition:persist />
+  <body>
+    <header id="header" transition:animate={"none"}>
+      <h1 class="main-header">
+        <span class="text-gradient">Pearce<br />Odegard</span>
+      </h1>
+      <Navbar allNavItems={allNavItems} path={Astro.url.pathname} />
     </header>
-    <main>
-      <slot />
-    </main>
+    <div class="main-sidebar">
+      <Sidebar items={sidebarItems} client:only />
+      <main transition:animate={"slide"}>
+        <slot />
+      </main>
+      <div class="spacer"></div>
+    </div>
+    <footer id="footer">
+      <p class="copy">&copy; {new Date().getFullYear()} Pearce Odegard</p>
+      <span class="footer-separator">&bull;</span>
+      <p>
+        <span class="global-p-a-style-override"
+          ><a href="/legal/terms">Terms & Conditions</a></span
+        >
+      </p>
+      <span class="footer-separator">&bull;</span>
+      <p>
+        <span class="global-p-a-style-override"
+          ><a href="/legal/privacy-policy">Privacy Policy</a></span
+        >
+      </p>
+      <span class="footer-separator">&bull;</span>
+      <p>
+        <span class="global-p-a-style-override"
+          ><a href="/contact">Contact Me</a></span
+        >
+      </p>
+      <span class="footer-separator">&bull;</span>
+      <div class="social-links">
+        <a href="https://github.com/podegard89" class="github">
+          <Image class="social-icon" src={gitHubMark} alt="GitHub Icon" />
+        </a>
+        <a href="https://www.linkedin.com/in/pearce-odegard/" class="linkedIn">
+          <Image class="social-icon" src={linkedInIcon} alt="LinkedIn Icon" />
+        </a>
+      </div>
+    </footer>
     <style is:global>
       /* VulfMono family */
       @font-face {
@@ -130,7 +171,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
       }
 
       ::-webkit-scrollbar {
-        width: 1.5em;
+        width: 1.2em;
       }
 
       ::-webkit-scrollbar-track {
@@ -169,6 +210,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
           rgb(var(--accent))
         );
       }
+
       html {
         font-family: "VulfMonoDemo", sans-serif;
         background: #008080;
@@ -180,28 +222,128 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
       body {
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
       }
 
       header {
         position: sticky;
         top: 0;
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
         margin: 0;
         padding-bottom: 1em;
+        padding-top: 1em;
         background-color: #008080;
         z-index: 100;
+        box-shadow:
+          rgba(0, 0, 0, 0.09) 0px 2px 1px,
+          rgba(0, 0, 0, 0.09) 0px 4px 2px,
+          rgba(0, 0, 0, 0.09) 0px 8px 4px,
+          rgba(0, 0, 0, 0.09) 0px 16px 8px,
+          rgba(0, 0, 0, 0.09) 0px 32px 16px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      /* this is for spacing the main content in the center, offsetting the width of the page contents sidebar */
+      .spacer {
+        width: 15%;
+      }
+
+      footer {
+        font-family: "VulfSansDemo", "sans-serif";
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: auto;
+        gap: 1em;
+        margin-bottom: 0;
+        padding: 0.5em;
+        border: none !important;
+        font-weight: normal !important;
+        z-index: 100;
+      }
+
+      @media (max-width: 768px) {
+        footer {
+          flex-direction: column;
+          gap: 0.5em;
+          line-height: 1;
+        }
+
+        .footer-separator {
+          display: none;
+        }
+      }
+
+      .copy {
+        font-style: italic;
+      }
+
+      footer > p > span > a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      footer > p > span > a:hover {
+        color: rgb(var(--accent-light));
+      }
+
+      .social-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1em;
+      }
+
+      .social-icon {
+        width: 2em;
+        height: 2em;
+        display: block;
+        background-color: #fff;
+        padding: 0.5em;
+        border-radius: 0.8em;
+      }
+
+      .social-icon:is(:hover, :focus) {
+        transform: scale(1.1);
       }
 
       main {
         margin: auto;
-        padding: 1rem;
         width: 1200px;
         max-width: calc(100% - 2rem);
         color: white;
         font-size: 20px;
         line-height: 1.6;
+      }
+
+      .main-sidebar {
+        display: flex;
+        flex-direction: row;
       }
 
       code {
@@ -215,30 +357,15 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
           Courier New,
           monospace;
       }
-      .page-indicator {
-        /* position: fixed; */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 1.5em;
-        background-color: rgb(var(--accent-light));
-        /* text-align: center; */
-        /* font-size: 16px; */
-        z-index: 100;
-      }
 
-      .heading {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-
-      h1 {
+      .main-header {
         font-size: 4rem;
         font-weight: 700;
         line-height: 1;
         text-align: center;
         font-family: "VulfMonoBlackDemo", sans-serif;
+
+        display: none;
       }
       .text-gradient {
         background-image: var(--accent-gradient);

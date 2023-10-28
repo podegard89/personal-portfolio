@@ -1,0 +1,39 @@
+.container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: start;
+  height: 100%;
+  width: 15%;
+  color: #fff;
+  top: 40%;
+  left: 0;
+  z-index: 1;
+  margin-left: 1rem;
+}
+
+.heading {
+  background-color: rgb(var(--accent-light));
+  padding: 1rem;
+  border-radius: 2rem;
+}
+
+ul {
+  line-height: 2.5;
+  font-size: 1.2rem;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+  background-color: rgba(var(--accent-light), 0);
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+
+.link:hover {
+  background-color: rgba(var(--accent-light), 0.8);
+  transition: background-color 0.3s ease;
+}
