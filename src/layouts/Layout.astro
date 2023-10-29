@@ -46,28 +46,23 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
   </head>
 
   <body>
-    <header id="header" transition:animate={"none"}>
+    <header id="header" class="page-link" transition:animate={"none"}>
       <h1 class="main-header">
         <span class="text-gradient">Pearce<br />Odegard</span>
       </h1>
       <Navbar allNavItems={allNavItems} path={Astro.url.pathname} />
     </header>
-    <div class="main-sidebar">
+    <div class="main-sidebar page-link">
       <Sidebar items={sidebarItems} client:only />
       <main transition:animate={"slide"}>
         <slot />
       </main>
       <div class="spacer"></div>
     </div>
-    <footer id="footer">
+    <footer id="footer" class="page-link">
       <p class="copy">&copy; {new Date().getFullYear()} Pearce Odegard</p>
       <span class="footer-separator">&bull;</span>
-      <p>
-        <span class="global-p-a-style-override"
-          ><a href="/legal/terms">Terms & Conditions</a></span
-        >
-      </p>
-      <span class="footer-separator">&bull;</span>
+
       <p>
         <span class="global-p-a-style-override"
           ><a href="/legal/privacy-policy">Privacy Policy</a></span
@@ -89,6 +84,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         </a>
       </div>
     </footer>
+
     <style is:global>
       /* VulfMono family */
       @font-face {
@@ -170,7 +166,22 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         font-display: swap;
       }
 
-      ::-webkit-scrollbar {
+      :global(p > a) {
+        text-decoration: none;
+        color: #333;
+        position: relative; /* Needed for the underline animation */
+        border-bottom: 2px solid transparent; /* Transparent border by default */
+        transition:
+          color 0.3s,
+          border-color 0.3s; /* Add smooth transitions */
+        font-weight: bold;
+      }
+      :global(p > a:hover) {
+        color: rgb(var(--accent));
+        border-bottom-color: rgb(var(--accent));
+      }
+
+      /* ::-webkit-scrollbar {
         width: 1.2em;
       }
 
@@ -192,7 +203,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         * {
           scrollbar-color: #ffffff rgb(var(--accent-light));
         }
-      }
+      } */
 
       :root {
         --accent: 204, 133, 0;
@@ -217,6 +228,8 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         background-size: 224px;
         overflow-y: scroll;
         overflow-x: hidden;
+        scroll-padding-top: 200px;
+        scroll-behavior: smooth;
       }
 
       body {
@@ -248,22 +261,15 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
           rgba(0, 0, 0, 0.09) 0px 32px 16px;
       }
 
-      .sidebar {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        width: 250px;
-        background-color: #333;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-
       /* this is for spacing the main content in the center, offsetting the width of the page contents sidebar */
       .spacer {
         width: 15%;
+      }
+
+      @media (max-width: 1400px) {
+        .spacer {
+          display: none;
+        }
       }
 
       footer {

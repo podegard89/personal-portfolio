@@ -11,13 +11,19 @@
   top: 40%;
   left: 0;
   z-index: 1;
-  margin-left: 1rem;
+  padding: 1rem;
+  padding-bottom: 0;
+  font-family: "VulfSansDemo", sans-serif;
+  border: rgba(var(--accent-light), 0.8) 0.2rem solid;
+  border-radius: 0 1rem 1rem 0;
+  border-left: none;
 }
 
 .heading {
   background-color: rgb(var(--accent-light));
   padding: 1rem;
   border-radius: 2rem;
+  margin: 0;
 }
 
 ul {
@@ -29,11 +35,21 @@ ul {
   color: #fff;
   text-decoration: none;
   background-color: rgba(var(--accent-light), 0);
-  padding: 0.5rem;
+  padding: 0.5rem 0.6rem;
   border-radius: 2rem;
 }
 
 .link:hover {
   background-color: rgba(var(--accent-light), 0.8);
   transition: background-color 0.3s ease;
+}
+
+.selected {
+  background-color: rgba(var(--accent-light), 0.8);
+}
+
+@media (max-width: 1400px) {
+  .container {
+    display: none;
+  }
 }

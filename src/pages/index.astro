@@ -42,10 +42,9 @@ const stackSVGs: StackItem[] = [
 ];
 
 const sidebarItems = [
-  { name: "Introduction", href: "#top" },
+  { name: "Introduction", href: "#introduction" },
   { name: "Tech Stack", href: "#techstack" },
   { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#footer" },
 ];
 ---
 
@@ -64,10 +63,9 @@ const sidebarItems = [
              ecosystem.
           </p>
           <p>
-            I am also an experienced communicator, leader, and educator. I have
+            I am also a passionate communicator, leader, and educator. I have
             taught remote web development courses on <em>JavaScript</em>,
-
-            <em>Java</em>, and <em>C#</em> (ASP.NET Core) for <a
+            <em>Java</em>, and <em>C#</em> (ASP.NET Core) at <a
               href="https://launchcode.org">LaunchCode</a
             >, as well as private music lessons for individuals of all ages.
           </p>
@@ -100,21 +98,23 @@ const sidebarItems = [
 </Layout>
 
 <style>
+  :root {
+    --fs-h1: clamp(1.8rem, 5vw, 3rem);
+  }
+
   h1 {
-    font-size: 700;
+    font-size: var(--fs-h1);
     line-height: 1;
     font-family: "VulfSansDemo", sans-serif;
   }
   h2 {
     color: rgb(var(--accent-alt));
+    font-family: "VulfMonoDemo", sans-serif;
   }
   .highlight {
     color: #ffa500;
-    /* background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%; */
+    font-family: "VulfMonoDemo", sans-serif;
+    word-spacing: -1.3rem;
     font-weight: 700;
   }
   .headshot {
@@ -140,14 +140,6 @@ const sidebarItems = [
       rgba(0, 0, 0, 0.09) 0px 8px 4px,
       rgba(0, 0, 0, 0.09) 0px 16px 8px,
       rgba(0, 0, 0, 0.09) 0px 32px 16px;
-  }
-
-  .main-siderbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
   }
 
   .main-content {

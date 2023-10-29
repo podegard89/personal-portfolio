@@ -7,45 +7,42 @@ import JobEntry from "../components/JobEntry.astro";
 const { title } = navItem.frontmatter;
 const jobEntries = await Astro.glob("../content/job-entries/*.md");
 
-const sidebarItems = [
-  { name: "Contact", href: "#footer" },
-  { name: "Back to top", href: "#top" },
-];
+const sidebarItems = jobEntries.map((jobEntry) => {
+  const { title } = jobEntry.frontmatter;
+  return {
+    name: `Role: ${title}`,
+    href: `#${title.replace(/\s/g, "")}`,
+  };
+});
 ---
 
 <Layout title={title} sidebarItems={sidebarItems}>
-  <main>
-    <div class="timeline-container" id="technical-work">
-      {
-        jobEntries.map((jobEntry, index) => {
-          return (
-            <>
-              <section>
-                <JobEntry jobEntry={jobEntry} />
-              </section>
+  <div class="timeline-container" id="technical-work">
+    {
+      jobEntries.map((jobEntry, index) => {
+        return (
+          <>
+            <section>
+              <JobEntry jobEntry={jobEntry} />
+            </section>
 
-              {index < jobEntries.length - 1 && (
-                <div class="timeline-divider" />
-              )}
-            </>
-          );
-        })
-      }
-    </div>
-  </main>
+            {index < jobEntries.length - 1 && <div class="timeline-divider" />}
+          </>
+        );
+      })
+    }
+  </div>
 </Layout>
 
 <style>
   main {
-    margin: auto;
-    padding: 1rem;
     width: 1200px;
     max-width: calc(100% - 2rem);
     color: white;
-    font-size: 20px;
     line-height: 1.6;
   }
   .timeline-container {
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;

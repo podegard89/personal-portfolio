@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Sidebar.module.css";
 
 type Props = {
@@ -6,33 +6,34 @@ type Props = {
 };
 
 const Sidebar: React.FC<Props> = ({ items }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [selected, setSelected] = useState<number>(0);
 
-  useEffect(() => {
-    const handleWindowResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+  const fullItems = [...items, { name: "Contact me!", href: "#footer" }];
 
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
-
-  return windowWidth <= 1400 ? (
-    <div className={styles.container}></div>
-  ) : (
+  return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Page Contents</h2>
       <ul>
-        {items.map(({ name, href }, index) => (
-          <li className={styles["list-item"]} key={index}>
-            <a className={styles.link} href={href}>
-              {name}
-            </a>
-          </li>
-        ))}
+        {fullItems.map(({ name, href }, index) => {
+          const selectedIsIndex = selected === index;
+          return (
+            <li
+              className={styles["list-item"]}
+              onClick={() => setSelected(index)}
+              key={index}
+            >
+              <a
+                role="button"
+                className={`${styles.link} ${
+                  selectedIsIndex ? styles.selected : ""
+                }`}
+                href={href}
+              >
+                {name}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
