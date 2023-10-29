@@ -1,10 +1,9 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import gitHubMark from "../images/github-mark.svg";
-import linkedInIcon from "../images/LinkedIn_icon.svg.png";
-import { Image } from "astro:assets";
+
 import Navbar from "../components/Navbar.astro";
 import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer.astro";
 interface Props {
   title: string;
   sidebarItems: { name: string; href: string }[];
@@ -59,32 +58,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
       </main>
       <div class="spacer"></div>
     </div>
-    <footer id="footer" class="page-link">
-      <p class="copy">&copy; {new Date().getFullYear()} Pearce Odegard</p>
-      <span class="footer-separator">&bull;</span>
-
-      <p>
-        <span class="global-p-a-style-override"
-          ><a href="/legal/privacy-policy">Privacy Policy</a></span
-        >
-      </p>
-      <span class="footer-separator">&bull;</span>
-      <p>
-        <span class="global-p-a-style-override"
-          ><a href="/contact">Contact Me</a></span
-        >
-      </p>
-      <span class="footer-separator">&bull;</span>
-      <div class="social-links">
-        <a href="https://github.com/podegard89" class="github">
-          <Image class="social-icon" src={gitHubMark} alt="GitHub Icon" />
-        </a>
-        <a href="https://www.linkedin.com/in/pearce-odegard/" class="linkedIn">
-          <Image class="social-icon" src={linkedInIcon} alt="LinkedIn Icon" />
-        </a>
-      </div>
-    </footer>
-
+    <Footer />
     <style is:global>
       /* VulfMono family */
       @font-face {
@@ -166,7 +140,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         font-display: swap;
       }
 
-      :global(p > a) {
+      p > a {
         text-decoration: none;
         color: #333;
         position: relative; /* Needed for the underline animation */
@@ -176,7 +150,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
           border-color 0.3s; /* Add smooth transitions */
         font-weight: bold;
       }
-      :global(p > a:hover) {
+      p > a:hover {
         color: rgb(var(--accent));
         border-bottom-color: rgb(var(--accent));
       }
@@ -270,72 +244,6 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         .spacer {
           display: none;
         }
-      }
-
-      footer {
-        font-family: "VulfSansDemo", "sans-serif";
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin-top: auto;
-        gap: 1em;
-        margin-bottom: 0;
-        padding: 0.5em;
-        border: none !important;
-        font-weight: normal !important;
-        z-index: 100;
-      }
-
-      @media (max-width: 768px) {
-        footer {
-          flex-direction: column;
-          gap: 0.5em;
-          line-height: 1;
-        }
-
-        .footer-separator {
-          display: none;
-        }
-      }
-
-      .copy {
-        font-style: italic;
-      }
-
-      footer > p > span > a {
-        color: #fff;
-        text-decoration: none;
-      }
-
-      footer > p > span > a:hover {
-        color: rgb(var(--accent-light));
-      }
-
-      .social-links {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1em;
-      }
-
-      .social-icon {
-        width: 2em;
-        height: 2em;
-        display: block;
-        background-color: #fff;
-        padding: 0.5em;
-        border-radius: 0.8em;
-      }
-
-      .social-icon:is(:hover, :focus) {
-        transform: scale(1.1);
       }
 
       main {

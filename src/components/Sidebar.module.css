@@ -17,6 +17,7 @@
   border: rgba(var(--accent-light), 0.8) 0.2rem solid;
   border-radius: 0 1rem 1rem 0;
   border-left: none;
+  margin-bottom: 2rem;
 }
 
 .heading {

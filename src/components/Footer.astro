@@ -1,0 +1,222 @@
+---
+import gitHubMark from "../images/github-mark.svg";
+import linkedInIcon from "../images/LinkedIn_icon.svg.png";
+import { Image } from "astro:assets";
+
+const allNavItems = await Astro.glob("../content/nav-items/*.md");
+---
+
+<footer id="footer" class="page-link">
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="https://github.com/podegard89" class="github">
+        <Image class="social-icon" src={gitHubMark} alt="GitHub Icon" />
+      </a>
+      <a href="https://www.linkedin.com/in/pearce-odegard/" class="linkedIn">
+        <Image class="social-icon" src={linkedInIcon} alt="LinkedIn Icon" />
+      </a>
+    </div>
+    <p class="copy">&copy; {new Date().getFullYear()} Pearce Odegard</p>
+    <ul class="footer-nav">
+      {
+        allNavItems.map((navItem) => (
+          <li>
+            <p>
+              <span class="global-p-a-style-override">
+                <a class="footer-link" href={navItem.frontmatter.href}>
+                  {navItem.frontmatter.title}
+                </a>
+              </span>
+            </p>
+          </li>
+        ))
+      }
+      <li>
+        <p>
+          <span class="global-p-a-style-override"
+            ><a class="footer-link" href="/legal/privacy-policy"
+              >Privacy Policy</a
+            ></span
+          >
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="contact-form-container">
+    <form
+      action="https://formsubmit.co/0d4471634204989cf17994616d4b9d05"
+      method="POST"
+    >
+      <h2>Contact me!</h2>
+      <input
+        class="text-input"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Name"
+        required
+      />
+      <input
+        class="text-input"
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email"
+      />
+
+      <textarea
+        class="text-input"
+        name="message"
+        id="message"
+        placeholder="Message"
+        rows="10"
+        required
+        cols="50"></textarea>
+
+      <input
+        type="hidden"
+        name="_autoresponse"
+        value="Thank you for contacting me! I'll get back to you as soon as possible."
+      />
+      <input
+        type="hidden"
+        name="_subject"
+        value="Portfolio Contact Submission"
+      />
+      <input
+        type="hidden"
+        name="_next"
+        value="https://pearceodegard.com/contact/success"
+      />
+
+      <button type="submit" class="submit">Send</button>
+    </form>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --form-fs: clamp(0.8rem, 1vw, 1rem);
+  }
+
+  footer {
+    font-family: "VulfSansDemo", "sans-serif";
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: auto;
+    gap: 1em;
+    margin-bottom: 0;
+    padding: 1em;
+    border: none !important;
+    font-weight: normal !important;
+    z-index: 100;
+    box-shadow:
+      rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px,
+      rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px,
+      rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      flex-direction: column-reverse;
+      gap: 2em;
+      line-height: 1;
+    }
+  }
+
+  .copy {
+    font-style: italic;
+  }
+
+  .footer-nav {
+    text-align: left;
+    font-size: medium;
+    line-height: 1;
+  }
+
+  .footer-link {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .footer-link:hover {
+    color: rgb(var(--accent-light));
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  .social-icon {
+    width: 4em;
+    height: 4em;
+    display: block;
+    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 0.8em;
+    transition: transform 0.1s ease-in-out;
+  }
+
+  .social-icon:is(:hover, :focus) {
+    transform: scale(1.1);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-image: var(--accent-gradient);
+    border: rgb(var(--accent-alt)) 2px solid;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    padding-top: 0;
+    font-family: "VulfSansDemo", monospace;
+  }
+
+  .text-input {
+    width: 60%;
+    padding: 1rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 0.5rem;
+    font-size: var(--form-fs);
+  }
+
+  .text-input::placeholder {
+    font-style: italic;
+  }
+
+  button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    background: rgb(var(--accent-light));
+    color: white;
+    border: white 2px solid;
+    box-shadow: none;
+    transition: box-shadow 0.2s ease-in-out;
+    font-family: "VulfMonoDemo", monospace;
+    font-style: italic;
+    cursor: pointer;
+  }
+
+  button:hover {
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset,
+      rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
+  }
+</style>

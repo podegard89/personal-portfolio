@@ -8,7 +8,7 @@ type Props = {
 const Sidebar: React.FC<Props> = ({ items }) => {
   const [selected, setSelected] = useState<number>(0);
 
-  const fullItems = [...items, { name: "Contact me!", href: "#footer" }];
+  const fullItems = [...items, { name: "Get in touch!", href: "#footer" }];
 
   return (
     <div className={styles.container}>

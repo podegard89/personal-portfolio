@@ -1,7 +1,34 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+
+const sidebarItems = [{ name: "Placeholder", href: "#top" }];
 ---
 
-<Layout title="Contact">
-  <h1>Success</h1>
+<Layout title="Contact" sidebarItems={sidebarItems}>
+  <div class="main-content">
+    <h1>
+      <span class="highlight">Messaged received</span>!
+    </h1>
+    <p>
+      Check out some featured blog posts below, or return <a href="/">Home</a>.
+    </p>
+  </div>
 </Layout>
+
+<style>
+  .main-content {
+    margin: 0 auto;
+    text-align: center;
+    font-family: "VulfSansDemo", sans-serif;
+  }
+
+  .highlight {
+    color: #ffa500;
+    font-family: "VulfMonoDemo", sans-serif;
+    font-weight: 700;
+  }
+
+  a {
+    font-weight: bold;
+  }
+</style>
