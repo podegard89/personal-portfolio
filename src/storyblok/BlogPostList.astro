@@ -1,0 +1,102 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { Image } from "astro:assets";
+import type { Post } from "../schemas/storyblok-schemas";
+
+interface Props {
+  blok?: any;
+  posts: Post[];
+}
+
+const { blok, posts } = Astro.props;
+---
+
+<div class="previews" {...storyblokEditable(blok)}>
+  {
+    posts.map((post) => {
+      // console.log(post.slug);
+      return (
+        <div class="preview-container" id={post.navId}>
+          <a class="preview-link" href={post.slug}>
+            <Image
+              src={post.image}
+              alt={`Preview image for ${post.title}`}
+              width={600}
+              height={350}
+            />
+            <div class="preview-text">
+              <h2 class="preview-header">{post.title}</h2>
+              <time class="preview-time">
+                {post.date.slice(post.date.indexOf(" ") + 1)}
+              </time>
+              <p class="preview-description">{post.description}</p>
+            </div>
+          </a>
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .previews {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .preview-container {
+    max-width: 600px;
+    border: 3px solid rgb(var(--accent-light));
+    border-radius: 1rem;
+    background: var(--accent-gradient-reverse);
+    overflow: hidden;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    transition: all 0.1s ease-in-out;
+  }
+
+  .preview-container:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  }
+
+  .preview-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .preview-text {
+    text-align: left;
+    display: grid;
+    grid-template: auto auto / 50% 50%;
+  }
+
+  .preview-header {
+    grid-area: 1 / 1 / span 1 / 1;
+  }
+
+  .preview-time {
+    grid-area: 1 / 2 / span 1 / span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .preview-description {
+    grid-area: 2 / 1 / span 1 / span 2;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* subject to change */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

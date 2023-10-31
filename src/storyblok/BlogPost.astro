@@ -1,0 +1,42 @@
+---
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
+import { Image } from "astro:assets";
+const { blok } = Astro.props;
+const content = renderRichText(blok.content);
+---
+
+<article class="post-container" {...storyblokEditable(blok)}>
+  <Image
+    width={800}
+    height={500}
+    src={`${blok.image.filename}/m/1600x0`}
+    alt={blok.title}
+  />
+  <h1>{blok.title}</h1>
+  <div class="main-post-content">
+    <Fragment set:html={content} />
+  </div>
+</article>
+
+<style>
+  h1 {
+    font-family: "VulfSansDemo", sans-serif;
+    font-size: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;``
+  }
+
+  .post-container {
+    font-family: "VulfSansDemo", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .main-post-content {
+    text-align: left;
+    width: 100%;
+  }
+</style>

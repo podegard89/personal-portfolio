@@ -54,6 +54,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         name="name"
         id="name"
         placeholder="Name"
+        autocomplete="name"
         required
       />
       <input
@@ -62,6 +63,7 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         name="email"
         id="email"
         placeholder="Email"
+        autocomplete="email"
       />
 
       <textarea
@@ -71,7 +73,8 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         placeholder="Message"
         rows="10"
         required
-        cols="50"></textarea>
+        cols="50"
+        autocomplete="off"></textarea>
 
       <input
         type="hidden"

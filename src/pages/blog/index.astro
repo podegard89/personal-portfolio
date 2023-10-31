@@ -1,51 +1,39 @@
 ---
+import { useStoryblokApi } from "@storyblok/astro";
 import Layout from "../../layouts/Layout.astro";
-// import Card from '../components/Card.astro';
-import * as navItem from "../../content/nav-items/3-blog.md";
+import BlogPostList from "../../storyblok/BlogPostList.astro";
+import { StoryblokDataSchema } from "../../schemas/storyblok-schemas.ts";
 
-const { title } = navItem.frontmatter;
+const storyblokApi = useStoryblokApi();
 
-const sidebarItems = [{ name: "Placeholder", href: "#" }];
+const { data } = await storyblokApi.get("cdn/stories", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  content_type: "blogPost",
+});
+
+const parsedData = StoryblokDataSchema.parse(data);
+
+const sidebarItems: { name: string; href: string }[] = [];
+
+const posts = parsedData.stories.map((story) => {
+  sidebarItems.push({
+    name: story.content.title,
+    href: `#${story.name}`,
+  });
+  return {
+    title: story.content.title,
+    date: new Date(story.published_at).toLocaleDateString("en-US", {
+      dateStyle: "full",
+    }),
+    description: story.content.description,
+    slug: story.full_slug,
+    image: story.content.image.filename,
+    navId: story.name,
+  };
+});
 ---
 
-<Layout title={title} sidebarItems={sidebarItems}>
-  <main>
-    <div class="coming-soon">Coming Soon!</div>
-  </main>
+<Layout title="Blog" sidebarItems={sidebarItems}>
+  <!-- <StoryblokComponent blok={content} /> -->
+  <BlogPostList posts={posts} />
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 1200px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  h2 {
-    font-size: 3rem;
-    font-weight: 500;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .coming-soon {
-    text-align: center;
-  }
-</style>
