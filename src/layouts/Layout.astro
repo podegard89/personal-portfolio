@@ -16,20 +16,11 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
 // const slideAnim = slide({ duration: "0.5s" });
 ---
 
-<script>
+<!-- <script>
   document.addEventListener("astro:after-swap", () => {
     console.log("navigation triggered");
   });
-
-  // window.onscroll = function () {
-  //   const main = document.querySelector("main");
-  //   if (window.scrollY !== 0) {
-  //     main!.style.paddingTop = "100px";
-  //     console.log("scrolling");
-  //   }
-  // };
-</script>
-
+</script> -->
 <html lang="en" transition:animate={"none"}>
   <head>
     <meta charset="UTF-8" />
@@ -52,7 +43,9 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
       <Navbar allNavItems={allNavItems} path={Astro.url.pathname} />
     </header>
     <div class="main-sidebar page-link">
-      <Sidebar items={sidebarItems} client:only />
+      <div class="sidebar-container">
+        <Sidebar items={sidebarItems} client:only />
+      </div>
       <main transition:animate={"slide"}>
         <slot />
       </main>
@@ -140,21 +133,6 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         font-display: swap;
       }
 
-      p > a {
-        text-decoration: none;
-        color: #333;
-        position: relative; /* Needed for the underline animation */
-        border-bottom: 2px solid transparent; /* Transparent border by default */
-        transition:
-          color 0.3s,
-          border-color 0.3s; /* Add smooth transitions */
-        font-weight: bold;
-      }
-      p > a:hover {
-        color: rgb(var(--accent));
-        border-bottom-color: rgb(var(--accent));
-      }
-
       /* ::-webkit-scrollbar {
         width: 1.2em;
       }
@@ -180,6 +158,8 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
       } */
 
       :root {
+        --main-background-color: #008080;
+        --gray: #333;
         --accent: 204, 133, 0;
         --accent-alt: 255, 165, 0;
         --accent-light: 219, 94, 114;
@@ -196,9 +176,24 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
         );
       }
 
+      p > a {
+        text-decoration: none;
+        color: var(--gray);
+        position: relative;
+        border-bottom: 2px solid transparent;
+        transition:
+          color 0.3s,
+          border-color 0.3s;
+        font-weight: bold;
+      }
+      p > a:hover {
+        color: rgb(var(--accent-alt));
+        border-bottom-color: rgb(var(--accent-alt));
+      }
+
       html {
         font-family: "VulfSansDemo", sans-serif;
-        background: #008080;
+        background: var(--main-background-color);
         background-size: 224px;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -235,24 +230,53 @@ const allNavItems = await Astro.glob("../content/nav-items/*.md");
           rgba(0, 0, 0, 0.09) 0px 32px 16px;
       }
 
-      /* this is for spacing the main content in the center, offsetting the width of the page contents sidebar */
-      .spacer {
-        width: 15%;
+      .sidebar-container {
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: start;
+        gap: 1rem;
+        height: 100%;
+        width: 20%;
+        color: #fff;
+        top: 40%;
+        left: 0;
+        z-index: 1;
+        padding: 1rem;
+        font-family: "VulfSansDemo", sans-serif;
+        border: rgba(var(--accent-light), 0.8) 0.2rem solid;
+        border-radius: 0 1rem 1rem 0;
+        border-left: none;
+        margin-bottom: 2rem;
       }
 
-      @media (max-width: 1400px) {
-        .spacer {
-          display: none;
-        }
+      /* this is for spacing the main content in the center, offsetting the width of the page contents sidebar */
+      .spacer {
+        width: 20%;
       }
 
       main {
         margin: auto;
-        width: 1200px;
-        max-width: calc(100% - 2rem);
+        max-width: 60%;
         color: white;
         font-size: 20px;
         line-height: 1.6;
+      }
+
+      @media (max-width: 1400px) {
+        .sidebar-container {
+          display: none;
+        }
+
+        .spacer {
+          display: none;
+        }
+
+        main {
+          max-width: calc(100% - 2rem);
+        }
       }
 
       .main-sidebar {

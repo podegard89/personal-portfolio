@@ -23,10 +23,10 @@ const posts = parsedData.stories.map((story) => {
   return {
     title: story.content.title,
     date: new Date(story.published_at).toLocaleDateString("en-US", {
-      dateStyle: "full",
+      dateStyle: "medium",
     }),
     description: story.content.description,
-    slug: story.full_slug,
+    slug: story.slug,
     image: story.content.image.filename,
     navId: story.name,
   };

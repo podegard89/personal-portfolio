@@ -10,7 +10,7 @@ const jobEntries = await Astro.glob("../content/job-entries/*.md");
 const sidebarItems = jobEntries.map((jobEntry) => {
   const { title } = jobEntry.frontmatter;
   return {
-    name: `Role: ${title}`,
+    name: title,
     href: `#${title.replace(/\s/g, "")}`,
   };
 });

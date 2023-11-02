@@ -99,7 +99,7 @@ const sidebarItems = [
 
 <style>
   :root {
-    --fs-h1: clamp(1.8rem, 5vw, 3rem);
+    --fs-h1: clamp(1.8rem, 5vw, 2.5rem);
   }
 
   h1 {
@@ -162,21 +162,7 @@ const sidebarItems = [
     flex-grow: 1;
     font-size: 1.5rem;
   }
-  .description > p > a {
-    text-decoration: none;
-    color: #333;
-    position: relative; /* Needed for the underline animation */
-    border-bottom: 2px solid transparent; /* Transparent border by default */
-    transition:
-      color 0.3s,
-      border-color 0.3s; /* Add smooth transitions */
-    font-weight: bold;
-  }
 
-  .description > p > a:hover {
-    color: #ffa500; /* Change the link color on hover */
-    border-color: #ffa500; /* Change border color on hover */
-  }
   .description code {
     font-size: 0.8em;
     font-weight: bold;
@@ -256,6 +242,10 @@ const sidebarItems = [
     .techstack {
       justify-content: space-evenly;
       gap: 1rem;
+    }
+
+    .techstack-section {
+      max-width: 85%;
     }
 
     .stack-item {

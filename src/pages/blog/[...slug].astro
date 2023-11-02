@@ -4,6 +4,10 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import Layout from "../../layouts/Layout.astro";
 import { StoryblokDataSchema } from "../../schemas/storyblok-schemas";
 
+const sidebarItems: { name: string; href: string }[] = [
+  { name: "Beginning", href: "#top" },
+];
+
 export async function getStaticPaths() {
   const sbApi = useStoryblokApi();
 
@@ -12,11 +16,11 @@ export async function getStaticPaths() {
     version: import.meta.env.DEV ? "draft" : "published",
   });
 
-  const stories = StoryblokDataSchema.parse(data).stories;
+  const parsedData = StoryblokDataSchema.parse(data);
 
-  return stories.map((story) => {
+  return parsedData.stories.map((story) => {
     return {
-      params: { slug: story.full_slug },
+      params: { slug: story.slug },
     };
   });
 }
@@ -24,16 +28,13 @@ export async function getStaticPaths() {
 const sbApi = useStoryblokApi();
 const { slug } = Astro.params;
 
-const { data } = await sbApi.get(`cdn/stories/${slug}`, {
+const { data } = await sbApi.get(`cdn/stories/blog/${slug}`, {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 
 const story = data.story;
 ---
 
-<Layout
-  title={story.content.title}
-  sidebarItems={[{ name: "Placeholder", href: "#top" }]}
->
+<Layout title={story.content.title} sidebarItems={sidebarItems}>
   <StoryblokComponent blok={story.content} />
 </Layout>
